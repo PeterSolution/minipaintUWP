@@ -39,8 +39,6 @@ namespace zadanie1
         //mojalinia linia;
 
         int idline = 0;
-        int iddow=0;
-        int lendow = 1;
 
         Point startpoint;
         Point endpoint;
@@ -54,8 +52,6 @@ namespace zadanie1
 
         
 
-        int[] linetype;
-        int[] lenghtoflinedow;
 
         //Stack<mojalinia> linie = new Stack<mojalinia>();
         Stack<Line> linie= new Stack<Line>();
@@ -150,17 +146,12 @@ namespace zadanie1
                         }
                     }
                 }
-                linetype[idline] = 1;
                 idline++;
                 btnus.IsEnabled = true;
 
             }
-            if (flag3 != 0)
-            {
-                iddow++;
-            }
+            
             flag3 = 0;
-            lendow = 1;
         }
 
         private void rdbProsty_Click(object sender, RoutedEventArgs e)
@@ -279,9 +270,6 @@ namespace zadanie1
                     }
                 }
 
-                linetype[idline] = 2;
-                lenghtoflinedow[iddow] = lendow;
-                lendow++;
                 idline++;
                 btnus.IsEnabled = true;
 
@@ -325,6 +313,7 @@ namespace zadanie1
         }*/
             
             canv.Children.Remove(linie.Peek());
+            linie.Pop();
             if (linie.Count == 0)
             {
                 btnus.IsEnabled = false;
