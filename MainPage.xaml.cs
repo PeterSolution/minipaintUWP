@@ -34,6 +34,13 @@ namespace zadanie1
         SolidColorBrush pedzel3 = new SolidColorBrush(Colors.Black);
         SolidColorBrush pedzel4 = new SolidColorBrush(Colors.Green);
 
+        List <int> jakalinia=new List<int>();
+        List <int> idlinia = new List<int> ();
+
+        /*int[] jakalinia;
+        int[] idlinia;*/
+        int idlin = 0;
+
         bool czyrysujeprosto = false;
         bool czyrysujedowolnie = false;
         //mojalinia linia;
@@ -97,6 +104,7 @@ namespace zadanie1
                     };
                     canv.Children.Add(linia);
                     linie.Push(linia);
+                    
                 }
                 else
                 {
@@ -149,8 +157,11 @@ namespace zadanie1
                 idline++;
                 btnus.IsEnabled = true;
 
+                jakalinia.Add(1);
+                idlinia.Add(idlin);
             }
-            
+
+            idlin++;
             flag3 = 0;
         }
 
@@ -270,6 +281,9 @@ namespace zadanie1
                     }
                 }
 
+                jakalinia.Add(2);
+                idlinia.Add(idlin);
+
                 idline++;
                 btnus.IsEnabled = true;
 
@@ -311,18 +325,51 @@ namespace zadanie1
             }
             idline = idline - 1;
         }*/
-            
-            canv.Children.Remove(linie.Peek());
+
+            /*canv.Children.Remove(linie.Peek());
             linie.Pop();
             if (linie.Count == 0)
             {
                 btnus.IsEnabled = false;
             }
-            idline = idline - 1;
+            idline = idline - 1;*/
+            int pomocid = idlin-1;
+            if (jakalinia.Count > 0)
+            {
+                if (jakalinia[idlin-1] == 1)
+                {
+                    if (linie.Count > 0)
+                    {
+                        // Pobierz i usuń ostatni element z listy linie
+                        Line und = linie.Pop();
 
 
+                        // Usuń ten element z polaRysowania
+                        canv.Children.Remove(und);
+                    }
+                }
+                else
+                {
+                    while (jakalinia[idlin-1] == pomocid)
+                    {
+                        if (linie.Count > 0)
+                        {
+                            // Pobierz i usuń ostatni element z listy linie
+                            Line und = linie.Pop();
 
 
+                            // Usuń ten element z polaRysowania
+                            canv.Children.Remove(und);
+                        }
+                        idlin--;
+                    }
+                }
+            }
+
+            if (linie.Count == 0)
+            {
+                btnus.IsEnabled = false;
+            }
         }
 
         private void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
