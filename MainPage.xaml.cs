@@ -22,9 +22,6 @@ using static System.Net.Mime.MediaTypeNames;
 namespace zadanie1
 {
 
-    /// <summary>
-    /// Pusta strona, która może być używana samodzielnie lub do której można nawigować wewnątrz ramki.
-    /// </summary>
 
     public sealed partial class MainPage : Page
     {
@@ -33,19 +30,13 @@ namespace zadanie1
         SolidColorBrush pedzel2 = new SolidColorBrush(Colors.Blue);
         SolidColorBrush pedzel3 = new SolidColorBrush(Colors.Black);
         SolidColorBrush pedzel4 = new SolidColorBrush(Colors.Green);
+        List<int> idlinia = new List<int>();
 
-        List <int> jakalinia=new List<int>();
-        List <int> idlinia = new List<int> ();
-
-        /*int[] jakalinia;
-        int[] idlinia;*/
         int idlin = 0;
 
         bool czyrysujeprosto = false;
         bool czyrysujedowolnie = false;
-        //mojalinia linia;
 
-        int idline = 0;
 
         Point startpoint;
         Point endpoint;
@@ -57,11 +48,10 @@ namespace zadanie1
 
         int thikness = 2;
 
-        
 
 
-        //Stack<mojalinia> linie = new Stack<mojalinia>();
-        Stack<Line> linie= new Stack<Line>();
+
+        Stack<Line> linie = new Stack<Line>();
 
         public MainPage()
         {
@@ -104,7 +94,7 @@ namespace zadanie1
                     };
                     canv.Children.Add(linia);
                     linie.Push(linia);
-                    
+
                 }
                 else
                 {
@@ -154,10 +144,8 @@ namespace zadanie1
                         }
                     }
                 }
-                idline++;
                 btnus.IsEnabled = true;
 
-                jakalinia.Add(1);
                 idlinia.Add(idlin);
             }
 
@@ -281,12 +269,10 @@ namespace zadanie1
                     }
                 }
 
-                jakalinia.Add(2);
-                idlinia.Add(idlin);
 
-                idline++;
                 btnus.IsEnabled = true;
 
+                idlinia.Add(idlin);
             }
         }
 
@@ -312,71 +298,32 @@ namespace zadanie1
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            /*mojalinia liniaDoUsuniecia = linie.FirstOrDefault(l => l.Id == (idline-1));
 
-            if (liniaDoUsuniecia != null)
+            int ostatniaLiczba = idlinia.Last(); 
+            int liczbaWystapienOstatniej = idlinia.Count(x => x == ostatniaLiczba); 
+            for (int i = 0; i < liczbaWystapienOstatniej; i++)
             {
-                linie.Remove(liniaDoUsuniecia);
-                canv.Children.Remove(liniaDoUsuniecia.Line);
+                Line und = linie.Pop();
+                canv.Children.Remove(und);
+                idlinia.RemoveAt(idlinia.Count - 1);
             }
-            if (linie.Count==0)
-            {
-                btnus.IsEnabled=false;
-            }
-            idline = idline - 1;
-        }*/
-
-            /*canv.Children.Remove(linie.Peek());
-            linie.Pop();
-            if (linie.Count == 0)
-            {
-                btnus.IsEnabled = false;
-            }
-            idline = idline - 1;*/
-            int pomocid = idlin-1;
-            if (jakalinia.Count > 0)
-            {
-                if (jakalinia[idlin-1] == 1)
-                {
-                    if (linie.Count > 0)
-                    {
-                        // Pobierz i usuń ostatni element z listy linie
-                        Line und = linie.Pop();
 
 
-                        // Usuń ten element z polaRysowania
-                        canv.Children.Remove(und);
-                    }
-                }
-                else
-                {
-                    while (jakalinia[idlin-1] == pomocid)
-                    {
-                        if (linie.Count > 0)
-                        {
-                            // Pobierz i usuń ostatni element z listy linie
-                            Line und = linie.Pop();
-
-
-                            // Usuń ten element z polaRysowania
-                            canv.Children.Remove(und);
-                        }
-                        idlin--;
-                    }
-                }
-            }
 
             if (linie.Count == 0)
             {
                 btnus.IsEnabled = false;
             }
+
+
         }
+
 
         private void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
             if (int.TryParse(txtgrub.Text, out int liczba))
             {
-                // Tekst jest cyfrą, a liczba zawiera przekonwertowaną wartość
+                
                 thikness = Convert.ToInt32(txtgrub.Text);
             }
 
