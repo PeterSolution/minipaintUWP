@@ -1,7 +1,7 @@
 ﻿<Application
-    x:Class="zadanie1.App"
+    x:Class="minipaintnew.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:zadanie1">
+    xmlns:local="using:minipaintnew">
 
 </Application>

@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="d76c0e96-e4f4-4671-b37c-1fd9620cfa35"
+    Name="acd53e44-396f-4425-a354-c1b89a96e16e"
     Publisher="CN=p"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="d76c0e96-e4f4-4671-b37c-1fd9620cfa35" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="acd53e44-396f-4425-a354-c1b89a96e16e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>zadanie1</DisplayName>
+    <DisplayName>minipaintnew</DisplayName>
     <PublisherDisplayName>p</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="zadanie1.App">
+      EntryPoint="minipaintnew.App">
       <uap:VisualElements
-        DisplayName="zadanie1"
+        DisplayName="minipaintnew"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="zadanie1"
+        Description="minipaintnew"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

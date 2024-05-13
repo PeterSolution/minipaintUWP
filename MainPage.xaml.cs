@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -14,22 +15,24 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
-using static System.Net.Mime.MediaTypeNames;
+using System.ComponentModel; 
+using System.Windows; 
+
 
 //Szablon elementu Pusta strona jest udokumentowany na stronie https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x415
 
-
-namespace zadanie1
+namespace minipaintnew
 {
-
-
+    /// <summary>
+    /// Pusta strona, która może być używana samodzielnie lub do której można nawigować wewnątrz ramki.
+    /// </summary>
     public sealed partial class MainPage : Page
     {
         Point punkt;
-        SolidColorBrush pedzel = new SolidColorBrush(Colors.Red);
+        /*SolidColorBrush pedzel = new SolidColorBrush(Colors.Red);
         SolidColorBrush pedzel2 = new SolidColorBrush(Colors.Blue);
         SolidColorBrush pedzel3 = new SolidColorBrush(Colors.Black);
-        SolidColorBrush pedzel4 = new SolidColorBrush(Colors.Green);
+        SolidColorBrush pedzel4 = new SolidColorBrush(Colors.Green);*/
         List<int> idlinia = new List<int>();
 
         int idlin = 0;
@@ -50,16 +53,45 @@ namespace zadanie1
 
 
 
-
         Stack<Line> linie = new Stack<Line>();
+
+        public CancelEventHandler Closing { get; private set; }
 
         public MainPage()
         {
-
             this.InitializeComponent();
 
-
         }
+
+
+        /*protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+        }
+        private async void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            e.Handled = true;
+
+            var dialog = new ContentDialog
+            {
+                Title = "Potwierdź zamknięcie",
+                Content = "Czy na pewno chcesz zamknąć aplikację?",
+                PrimaryButtonText = "Tak",
+                CloseButtonText = "Anuluj"
+            };
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                Application.Current.Exit();
+            }
+        }*/
+
+
+
 
         private void rdbDowolny_Checked(object sender, RoutedEventArgs e)
         {
@@ -80,6 +112,7 @@ namespace zadanie1
         {
             if (czyrysujeprosto)
             {
+                SolidColorBrush pedzel = new SolidColorBrush(colorpicker.Color);
                 endpoint = e.GetCurrentPoint(this).Position;
                 if (flag4 == 0)
                 {
@@ -98,51 +131,7 @@ namespace zadanie1
                 }
                 else
                 {
-                    if (flag4 == 1)
-                    {
-                        Line linia = new Line
-                        {
-                            X1 = startpoint.X - 5,
-                            Y1 = startpoint.Y - 137,
-                            X2 = endpoint.X - 5,
-                            Y2 = endpoint.Y - 137,
-                            Stroke = pedzel2,
-                            StrokeThickness = thikness,
-                        };
-                        canv.Children.Add(linia);
-                        linie.Push(linia);
-                    }
-                    else
-                    {
-                        if (flag4 == 2)
-                        {
-                            Line linia = new Line
-                            {
-                                X1 = startpoint.X - 5,
-                                Y1 = startpoint.Y - 137,
-                                X2 = endpoint.X - 5,
-                                Y2 = endpoint.Y - 137,
-                                Stroke = pedzel3,
-                                StrokeThickness = thikness,
-                            };
-                            canv.Children.Add(linia);
-                            linie.Push(linia);
-                        }
-                        else
-                        {
-                            Line linia = new Line
-                            {
-                                X1 = startpoint.X - 5,
-                                Y1 = startpoint.Y - 137,
-                                X2 = endpoint.X - 5,
-                                Y2 = endpoint.Y - 137,
-                                Stroke = pedzel4,
-                                StrokeThickness = thikness,
-                            };
-                            canv.Children.Add(linia);
-                            linie.Push(linia);
-                        }
-                    }
+                    
                 }
                 btnus.IsEnabled = true;
 
@@ -199,6 +188,7 @@ namespace zadanie1
                 endpoint = e.GetCurrentPoint(this).Position;
                 if (flag4 == 0)
                 {
+                    SolidColorBrush pedzel = new SolidColorBrush(colorpicker.Color);
                     Line linia = new Line
                     {
                         X1 = startpoint.X - 5,
@@ -211,62 +201,6 @@ namespace zadanie1
                     canv.Children.Add(linia);
                     startpoint = endpoint;
                     linie.Push(linia);
-                }
-                else
-                {
-                    if (flag4 == 1)
-                    {
-                        Line linia = new Line
-                        {
-                            X1 = startpoint.X - 5,
-                            Y1 = startpoint.Y - 137,
-                            X2 = endpoint.X - 5,
-                            Y2 = endpoint.Y - 137,
-                            Stroke = pedzel2,
-                            StrokeThickness = thikness,
-                        };
-
-                        canv.Children.Add(linia);
-                        startpoint = endpoint;
-                        linie.Push(linia);
-                    }
-                    else
-                    {
-                        if (flag4 == 2)
-                        {
-                            Line linia = new Line
-                            {
-                                X1 = startpoint.X - 5,
-                                Y1 = startpoint.Y - 137,
-                                X2 = endpoint.X - 5,
-                                Y2 = endpoint.Y - 137,
-                                Stroke = pedzel3,
-                                StrokeThickness = thikness,
-                            };
-
-                            canv.Children.Add(linia);
-                            startpoint = endpoint;
-                            linie.Push(linia);
-                        }
-                        else
-                        {
-                            Line linia = new Line
-                            {
-                                X1 = startpoint.X - 5,
-                                Y1 = startpoint.Y - 137,
-                                X2 = endpoint.X - 5,
-                                Y2 = endpoint.Y - 137,
-                                Stroke = pedzel4,
-                                StrokeThickness = thikness,
-
-                            };
-
-                            canv.Children.Add(linia);
-                            startpoint = endpoint;
-                            linie.Push(linia);
-
-                        }
-                    }
                 }
 
 
@@ -299,8 +233,8 @@ namespace zadanie1
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
 
-            int ostatniaLiczba = idlinia.Last(); 
-            int liczbaWystapienOstatniej = idlinia.Count(x => x == ostatniaLiczba); 
+            int ostatniaLiczba = idlinia.Last();
+            int liczbaWystapienOstatniej = idlinia.Count(x => x == ostatniaLiczba);
             for (int i = 0; i < liczbaWystapienOstatniej; i++)
             {
                 Line und = linie.Pop();
@@ -319,14 +253,11 @@ namespace zadanie1
         }
 
 
-        private void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
-        {
-            if (int.TryParse(txtgrub.Text, out int liczba))
-            {
-                
-                thikness = Convert.ToInt32(txtgrub.Text);
-            }
+        
 
+        private void sldgrubosc_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            thikness= Convert.ToInt32(sldgrubosc.Value);
         }
     }
 }
